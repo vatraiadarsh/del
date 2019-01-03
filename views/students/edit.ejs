@@ -1,0 +1,60 @@
+<% include ../shared/header.ejs %>
+
+<section>
+    <div class="row">
+
+        <div class="pull-right">
+            <br>
+            <br>
+            <a href="/students" class="btn btn-md btn-primary">
+                <i class="fa fa-eye"></i> Available rooms
+            </a>
+            <a href="/students/create" class="btn btn-md btn-primary">
+                <i class="fa fa-plus"></i> Add rooms
+            </a>
+            <hr>
+        </div>
+
+        <div class="col-md-8">
+            <div class="page-header">
+                <h1>Update some Fields :)</h1>
+            </div>
+
+            <form action="/students/update/<%= student._id%>" method="post">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                <div class="form-group">
+                  <label for="fname">First Name *</label>
+                  <input class="form-control" required name="fname" type="text" value="<%= student.fname %>" />
+                </div>
+            
+                <div class="form-group">
+                <label for="lname">Last Name *</label>
+                  <input class="form-control" required name="lname" type="text" value="<%= student.lname %>" />
+                </div>
+            
+                <div class="form-group">
+                  <label for="email">Email *</label>
+                  <input class="form-control" required name="email" type="email" value="<%= student.email %>" />
+                </div>
+            
+                <div class="form-group">
+                  <label for="message">Message *</label>
+                  <textarea class="form-control" required name="message" rows="4" autofocus><%= student.message %></textarea>
+                </div>
+            
+                <div class="form-group">
+                <label for="contact">Contact *</label>
+                <input class="form-control" required name="contact" type="text" value="<%= student.contact %>" />
+                </div>
+                <button class="btn btn-primary" type="submit">Update</button>
+            </form>
+        </div>
+
+
+
+    </div>
+</section>
+
+
+<!-- Page footer-->
+<% include ../shared/footer.ejs %>

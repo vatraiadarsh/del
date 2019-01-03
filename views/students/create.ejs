@@ -1,0 +1,95 @@
+<% include ../shared/header.ejs %>
+
+<section>
+    <div class="row">
+        <div class="pull-right">
+            <br>
+            <br>
+            <a href="/students" class="btn btn-md btn-primary">
+                <i class="fa fa-eye"></i> Available rooms
+            </a>
+            <a href="/students/create" class="btn btn-md btn-primary">
+                <i class="fa fa-plus"></i> Add rooms
+            </a>
+            <hr>
+        </div>
+
+    <div class="col-md-8">
+      <div class="page-header">
+        <% if (Object.keys(errors).length === 0) { %>
+        <h2>Send us a message</h2>
+        <% } else { %>
+        <div class="alert alert-danger fade in">
+        <a href="#" class="close" data-dismiss="alert">&times;</a>
+        <strong>Oops!</strong> A problem has been occurred while submitting your data.
+        <hr>
+        <ul class="errors-list mt-3">
+          <% Object.values(errors).forEach(error => { %>
+          <li>
+          <i class="fa fa-exclamation-triangle"></i>&nbsp;<%= error.msg %>
+          </li>
+          <% }) %>
+        </ul>
+        <% } %>     
+      </div>
+  <form method="post" action="/students/create" novalidate>
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+      <div class="form-group <%= errors.fname ? 'form-field-invalid' : '' %>">
+        <label for="fname">First Name *</label>
+        <input class="form-control" id="fname" name="fname" type="text" value="<%= data.fname %>" />
+        <% if (errors.fname) { %>
+        <div class="error">
+         <i class="fa fa-exclamation-circle"></i>&nbsp;<%= errors.fname.msg %>
+        </div>
+        <% } %>
+      </div>
+    
+      <div class="form-group <%= errors.lname ? 'form-field-invalid' : '' %>">
+      <label for="lname">Last Name *</label>
+        <input class="form-control" id="lname" name="lname" type="text" value="<%= data.lname %>" />
+        <% if (errors.lname) { %>
+        <div class="error">
+          <i class="fa fa-exclamation-circle"></i>&nbsp;<%= errors.lname.msg %>
+        </div>
+        <% } %>
+      </div>
+
+      <div class="form-group <%= errors.email ? 'form-field-invalid' : '' %>">
+        <label for="email">Email *</label>
+        <input class="form-control" id="email" name="email" type="email" value="<%= data.email %>" />
+        <% if (errors.email) { %>
+        <div class="error">
+          <i class="fa fa-exclamation-circle"></i>&nbsp;<%= errors.email.msg %>
+        </div>
+        <% } %>
+      </div>
+
+      <div class="form-group <%= errors.message ? 'form-field-invalid' : '' %>">
+        <label for="message">Message *</label>
+        <textarea class="form-control" id="message" name="message" rows="4" autofocus><%= data.message %></textarea>
+        <% if (errors.message) { %>
+        <div class="error">
+          <i class="fa fa-exclamation-circle"></i>&nbsp;<%= errors.message.msg %>
+        </div>
+        <% } %>
+      </div>
+
+      <div class="form-group <%= errors.contact ? 'form-field-invalid' : '' %>">
+      <label for="contact">Contact *</label>
+      <input class="form-control" id="contact" name="contact" type="text" value="<%= data.contact %>" />
+      <% if (errors.contact) { %>
+      <div class="error">
+        <i class="fa fa-exclamation-circle"></i>&nbsp;<%= errors.contact.msg %>
+      </div>
+      <% } %>
+     </div>
+
+     
+
+    <button class="btn btn-primary" type="submit">Send</button>
+
+  </form>
+</section>
+
+
+<% include ../shared/footer.ejs %>

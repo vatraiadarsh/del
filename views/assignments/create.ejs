@@ -1,0 +1,18 @@
+<% include ../shared/header.ejs %>
+
+<form class="col-md-7" method="post" action="/assignments/create" novalidate>
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <div class="form-group">
+     <label for="fname">Subject *</label>
+     <input class="form-control" id="subject" name="subject" type="text" />
+    </div>
+
+    <div class="form-group">
+     <label for="fname">Teacher *</label>
+     <input class="form-control" name="teacher" type="text" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+<% include ../shared/footer.ejs %>

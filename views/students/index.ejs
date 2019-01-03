@@ -1,0 +1,118 @@
+<% include ../shared/header.ejs %>
+
+<div class="row">
+
+  <div class="pull-left">
+    <br>
+    <form action="/students" method="GET" class="form-inline">
+      <div class="form-group">
+        <input type="text" name="q" placeholder="search..." class="form-control">
+        <button type="submit" class="btn btn-default">
+          <i class="fa fa-search"></i>
+        </button>
+      </div>
+
+    </form>
+    <hr>
+  </div>
+
+
+  <div class="pull-right">
+    <br>
+    <br>
+    <a href="/students/importcsv" class="btn btn-md btn-primary">
+      <i class="fa fa-download"> Import from CSV</i>
+    </a>
+
+    <a href="/students/exportcsv" class="btn btn-md btn-primary">
+      <i class="fa fa-download"> Export To CSV</i>
+    </a>
+
+    <a href="/students/create" class="btn btn-md btn-primary">
+      <i class="fa fa-plus"> Add New Student</i>
+    </a>
+    <hr>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <% if (students.length > 0){ %>
+      <table class="table table-responsive table-hover">
+        <thead>
+          <tr>
+            <th> Id </th>
+            <th> First Name </th>
+            <th> Last Name </th>
+            <th> Email </th>
+            <th> Message </th>
+            <th> Contact </th>
+            <th> Subject </th>
+            <th>Created Date</th>
+            <th> Action </th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for(i=students.length - 1; i >= 0; i--) { %>
+          <tr>
+            <td>
+              <%= parseInt((Math.random() * 100), 10) %>
+            </td>
+            <td>
+              <%= students[i].fname %>
+            </td>
+            <td>
+              <%= students[i].lname %>
+            </td>
+            <td>
+              <%= students[i].email %>
+            </td>
+            <td>
+              <%= students[i].message %>
+            </td>
+            <td>
+              <%= students[i].contact %>
+            </td>
+                        <td>
+              <%= students[i].teacher.genre %>
+            </td>
+            <td>
+              <%= moment(students[i].createdAt).format('MMMM Do YYYY') %>,
+              <i>
+                <%= moment(students[i].createdAt).fromNow()%></i>
+            </td>
+            <td>
+
+
+              <form action="/students/delete/<%= students[i]._id %>" method="post">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                <a href="/students/edit/<%= students[i]._id %>" class="btn btn-primary btn-xs">
+                  <i class="fa fa-pencil" aria-hidden="true"></i>
+                </a>
+                <button type="submit" class="btn btn-danger btn-xs">
+                  <i class="fa fa-trash" aria-hidden="true"></i>
+                </button>
+                <a href="javascript:void(0)" class=" email-btn btn btn-success btn-xs">
+                  <i class="fa fa-envelope" aria-hidden="true"></i>
+                </a>
+              </form>
+
+            </td>
+
+          </tr>
+          <% } %>
+        </tbody>
+      </table>
+
+      <% } else { %>
+      <div class="alert alert-info">
+        No Students Available
+        <i>please <a href="/students/create">add some Students here</a> or search with some other query</i>
+        <hr>
+      </div>
+      <%  } %>
+
+    </div>
+  </div>
+
+
+  <% include ../shared/footer.ejs %>

@@ -1,0 +1,56 @@
+<% include ../shared/header.ejs %>
+
+<div class="col-md-7">
+   <div class="page-header">
+      <h3>Register</h3>
+   </div>
+
+   <% if (typeof errors != 'undefined') { %>
+   <% errors.forEach(function(error) { %>
+   <div class="alert alert-danger fade in">
+      <a href="#" class="close" data-dismiss="alert">&times;</a>
+      <%= error.msg %>
+   </div>
+   <% }); %>
+   <% } %>
+
+   <form method="post" action="/users/register" novalidate>
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+      <div class="form-group">
+         <label for="fname">First Name *</label>
+         <input class="form-control" name="fname" type="text" value="<%= typeof fname != 'undefined' ? fname:'' %>" />
+      </div>
+
+      <div class="form-group">
+         <label for="fname">Last Name *</label>
+         <input class="form-control" name="lname" type="text" value="<%= typeof lname != 'undefined' ? lname:'' %>" />
+      </div>
+
+      <div class="form-group">
+         <label for="fname">Username *</label>
+         <input class="form-control" name="username" type="text" value="<%= typeof username != 'undefined' ? username:'' %>" />
+      </div>
+
+      <div class="form-group">
+         <label for="fname">email *</label>
+         <input class="form-control" name="email" type="text" value="<%= typeof email != 'undefined' ? email:'' %>" />
+      </div>
+
+      <div class="form-group">
+         <label for="fname">password *</label>
+         <input class="form-control" name="password" type="password" value="<%= typeof password != 'undefined' ? password:'' %>" />
+      </div>
+
+      <div class="form-group">
+         <label for="fname"> Confirm password *</label>
+         <input class="form-control" name="password2" type="password" value="<%= typeof password2 != 'undefined' ? password2:'' %>" />
+      </div>
+
+      <button type="submit" class="btn btn-primary">Submit</button>
+   </form>
+   <br>
+   <em> Already have an account? <a href="/users/login">Login</a> </em>
+</div>
+
+
+<% include ../shared/footer.ejs %>
